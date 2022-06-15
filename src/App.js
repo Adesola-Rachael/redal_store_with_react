@@ -1,8 +1,16 @@
 
 import {Component} from 'react';
-// import logo from './logo.svg';
+import CardList from './components/card-list/card-list.component';
+import SearchBox from './components/search-box/search-box.component';
+import Banner from './components/header/banner.component';
+import BreadCrumb from './components/header/breadcrumb.component';
+import NavBar from './components/nav/nav-bar.component';
+import  Footer from './components/footer/footer.component';
+
+
 import './App.css';
 import './text.css';
+import './components/icon.component.css';
 
 class App extends Component { 
   constructor(){
@@ -61,37 +69,62 @@ class App extends Component {
       ],
      
       mons:[],
+
+      searchfield:'',
     };
-    console.log('1')
   }
   componentDidMount(){
-    console.log('3')
-    fetch('https://jsonplaceholder.typicode.com/users')
+    //  fetch('https://jsonplaceholder.typicode.com/users')
+    fetch('https://fakestoreapi.com/products')
     .then(response=>response.json())
-    .then((users)=>this.setState(()=>
+    .then((products)=>this.setState(()=>
     {
-      return {mons:users}
-    },
-    ()=>console.log(this.state)
+      return {mons:products}
+    }
+    // ()=>console.log(this.state)
     ))
   }
+  onsearchchange= (event)=>
+  {
+   // console.log(event.target.value);
+   const searchfield=event.target.value.toLowerCase();
+
+ this.setState(()=>{
+   return {searchfield};
+ });
+
+ }
   render (){
-    console.log('2')
+    const{searchfield,mons}=this.state;
+    const{onsearchchange}=this;
+    
+    const filteredMonsters= mons.filter((mon)=>{
+      return mon.title.toLowerCase().includes(searchfield);
+    });
+    
+ 
     return (
       <div className="App">
-        <div className="text">Welcome to my first react  app</div>
+        <NavBar onChangeHandler={onsearchchange} placeholder={'Search Store'} className={'search-box'}/>
+
+        <Banner/>
+        {/* <BreadCrumb/> */}
+           {/* <SearchBox onChangeHandler={onsearchchange} placeholder={'Search Store'} className={'search-box'}/> */}
+
           {
-            this.state.infos.map((info)=>{
-            return <h1 key={info.id}>name:{info.name}<br/>city:{info.location.city}</h1>
-            })
+            // this.state.infos.map((info)=>{
+            // return <h1 key={info.id}>name:{info.name}<br/>city:{info.location.city}</h1>
+            // })
           }
 
-{
-            this.state.mons.map((mon)=>{
-            return <h1 key={mon.id}>name:{mon.name}</h1>
+{/* {
+          filteredMonsters.map((mon)=>{
+            return <h1 key={mon.id}>name:{mon.title}</h1>
             })
-          }
-       
+          } */}
+          
+          <CardList mons={filteredMonsters}/>
+          <Footer/>
       </div>
     );
   }

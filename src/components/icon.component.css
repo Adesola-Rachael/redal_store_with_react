@@ -1,4 +1,4 @@
-
+/* 
 .bi::before,
 [class^="bi-"]::before,
 [class*=" bi-"]::before {
@@ -1547,4 +1547,4 @@
 .bi-device-ssd::before { content: "\f6fb"; }
 .bi-displayport-fill::before { content: "\f6fc"; }
 .bi-mortarboard-fill::before { content: "\f6fd"; }
-.bi-mortarboard::before { content: "\f6fe"; }
+.bi-mortarboard::before { content: "\f6fe"; } */

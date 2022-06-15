@@ -8,9 +8,9 @@ import NavBar from './components/nav/nav-bar.component';
 import  Footer from './components/footer/footer.component';
 
 
-import './App.css';
+// import './App.css';
 import './text.css';
-import './components/icon.component.css';
+// import './components/icon.component.css';
 
 class App extends Component { 
   constructor(){
